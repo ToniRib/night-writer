@@ -16,6 +16,12 @@ class NightWriter
       (97..122).to_a.include?(num)
     end
   end
+
+  def count_upper(str)
+    str.each_byte.count do |num|
+      (65..90).to_a.include?(num)
+    end
+  end
 end
 
 class FileReader
