@@ -10,6 +10,15 @@ class NightWriter
   def get_file_text
     file_reader.read
   end
+
+  def count_lower(str)
+    return 0 if str.empty?
+    total = 0
+    str.each_byte do |num|
+      total += 1 if (97..122).to_a.include?(num)
+    end
+    total
+  end
 end
 
 class FileReader
