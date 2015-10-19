@@ -25,7 +25,7 @@ class NightWriter
     end
   end
 
-  def count_chars_and_shifts(str)
+  def count_all_chars(str)
     count_upper(str) * 2 + count_lower(str) + count_spaces(str)
   end
 end
@@ -39,4 +39,4 @@ end
 
 writer = NightWriter.new
 text = writer.file_reader.read
-puts writer.count_chars_and_shifts(text)
+puts "Created #{ARGV[1]} containing #{writer.count_all_chars(text)} characters"

@@ -55,7 +55,7 @@ class NightWriterTest < Minitest::Test
 
   def test_counts_number_of_characters_plus_shifts
     writer = NightWriter.new
-    assert_equal 9, writer.count_chars_and_shifts('AbCdEf')
+    assert_equal 9, writer.count_all_chars('AbCdEf')
   end
 
   def test_counts_number_of_spaces
@@ -65,6 +65,6 @@ class NightWriterTest < Minitest::Test
 
   def test_counts_all_spaces_shifts_and_chars
     writer = NightWriter.new
-    assert_equal 18, writer.count_chars_and_shifts('Hello there Toni')
+    assert_equal 18, writer.count_all_chars('Hello there Toni')
   end
 end
