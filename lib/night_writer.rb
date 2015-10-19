@@ -46,7 +46,10 @@ class Converter
                   ghjqrtw: '00'
   }
 
-  BOTTOM_LINE = {
+  BOTTOM_LINE = { abcdefghij: '..',
+                  klmnopqrst: '0.',
+                  w: '.0',
+                  uvxyz: '00'
   }
 
   def initialize
@@ -60,7 +63,15 @@ class Converter
   end
 
   def get_top_line(letter)
-    find_braille_match(TOP_LINE, letter)[1]
+    find_braille_match(TOP_LINE, letter).last
+  end
+
+  def get_middle_line(letter)
+    find_braille_match(MIDDLE_LINE, letter).last
+  end
+
+  def get_bottom_line(letter)
+    find_braille_match(BOTTOM_LINE, letter).last
   end
 end
 

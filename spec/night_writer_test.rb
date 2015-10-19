@@ -76,13 +76,12 @@ class ConverterTest < Minitest::Test
   end
 
   def test_converts_single_letter_to_middle_line_of_braille
-    skip
     writer = NightWriter.new
-    assert_equal '0.', writer.converter.get_middle_line('a')
+    assert_equal '..', writer.converter.get_middle_line('a')
   end
+
   def test_converts_single_letter_to_bottom_line_of_braille
-    skip
     writer = NightWriter.new
-    assert_equal '0.', writer.converter.get_bottom_line('a')
+    assert_equal '..', writer.converter.get_bottom_line('a')
   end
 end
