@@ -54,7 +54,6 @@ class NightWriterTest < Minitest::Test
   end
 
   def test_counts_number_of_characters_plus_shifts
-    skip
     writer = NightWriter.new
     assert_equal 9, writer.count_chars_and_shifts('AbCdEf')
   end

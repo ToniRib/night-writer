@@ -22,6 +22,10 @@ class NightWriter
       (65..90).to_a.include?(num)
     end
   end
+
+  def count_chars_and_shifts(str)
+    count_upper(str) * 2 + count_lower(str)
+  end
 end
 
 class FileReader
