@@ -1,10 +1,11 @@
 require 'pry'
 
 class NightWriter
-  attr_reader :file_reader
+  attr_reader :file_reader, :file_writer
 
   def initialize
     @file_reader = FileReader.new
+    @file_writer = FileWriter.new
   end
 
   def count_lower(str)
@@ -37,6 +38,16 @@ class FileReader
   end
 end
 
+class FileWriter
+  def write(text)
+      filename = ARGV[1]
+      outfile = File.open(filename, 'w')
+      outfile.write(text)
+      outfile.close
+  end
+end
+
 writer = NightWriter.new
 text = writer.file_reader.read
+writer.file_writer.write(text)
 puts "Created #{ARGV[1]} containing #{writer.count_all_chars(text)} characters"
