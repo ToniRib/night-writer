@@ -62,16 +62,21 @@ class Converter
     line.find { |k, v| k.to_s.include?(letter) }
   end
 
+  def capital?(letter)
+    byte = letter.bytes.first
+    (65..90).to_a.include?(byte)
+  end
+
   def get_top_line(letter)
-    find_braille_match(TOP_LINE, letter).last
+    @top << find_braille_match(TOP_LINE, letter).last
   end
 
   def get_middle_line(letter)
-    find_braille_match(MIDDLE_LINE, letter).last
+    @mid << find_braille_match(MIDDLE_LINE, letter).last
   end
 
   def get_bottom_line(letter)
-    find_braille_match(BOTTOM_LINE, letter).last
+    @bot << find_braille_match(BOTTOM_LINE, letter).last
   end
 end
 

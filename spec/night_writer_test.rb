@@ -73,15 +73,23 @@ class ConverterTest < Minitest::Test
   def test_converts_single_letter_to_top_line_of_braille
     writer = NightWriter.new
     assert_equal '0.', writer.converter.get_top_line('a')
+    assert_equal '0.', writer.converter.top
   end
 
   def test_converts_single_letter_to_middle_line_of_braille
     writer = NightWriter.new
     assert_equal '..', writer.converter.get_middle_line('a')
+    assert_equal '..', writer.converter.mid
   end
 
   def test_converts_single_letter_to_bottom_line_of_braille
     writer = NightWriter.new
     assert_equal '..', writer.converter.get_bottom_line('a')
+    assert_equal '..', writer.converter.bot
+  end
+
+  def test_detects_a_capital_letter
+    writer = NightWriter.new
+    assert writer.converter.capital?('A')
   end
 end
