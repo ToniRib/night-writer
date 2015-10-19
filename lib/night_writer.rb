@@ -12,12 +12,9 @@ class NightWriter
   end
 
   def count_lower(str)
-    return 0 if str.empty?
-    total = 0
-    str.each_byte do |num|
-      total += 1 if (97..122).to_a.include?(num)
+    str.each_byte.count do |num|
+      (97..122).to_a.include?(num)
     end
-    total
   end
 end
 

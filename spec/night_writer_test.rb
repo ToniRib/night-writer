@@ -3,6 +3,11 @@ require 'minitest/pride'
 require './lib/night_writer'
 
 class NightWriterTest < Minitest::Test
+  def test_returns_zero_lower_case_chars_if_string_is_empty
+    writer = NightWriter.new
+    assert_equal 0, writer.count_lower('')
+  end
+
   def test_counts_number_of_lower_case_characters
     writer = NightWriter.new
     assert_equal 5, writer.count_lower('abcde')
