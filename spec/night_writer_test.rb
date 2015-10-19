@@ -68,3 +68,21 @@ class NightWriterTest < Minitest::Test
     assert_equal 18, writer.count_all_chars('Hello there Toni')
   end
 end
+
+class ConverterTest < Minitest::Test
+  def test_converts_single_letter_to_top_line_of_braille
+    writer = NightWriter.new
+    assert_equal '0.', writer.converter.get_top_line('a')
+  end
+
+  def test_converts_single_letter_to_middle_line_of_braille
+    skip
+    writer = NightWriter.new
+    assert_equal '0.', writer.converter.get_middle_line('a')
+  end
+  def test_converts_single_letter_to_bottom_line_of_braille
+    skip
+    writer = NightWriter.new
+    assert_equal '0.', writer.converter.get_bottom_line('a')
+  end
+end
