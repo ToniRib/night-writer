@@ -73,19 +73,16 @@ class ConverterTest < Minitest::Test
   def test_converts_single_letter_to_top_line_of_braille
     writer = NightWriter.new
     assert_equal '0.', writer.converter.get_top_line('a')
-    assert_equal '0.', writer.converter.top
   end
 
   def test_converts_single_letter_to_middle_line_of_braille
     writer = NightWriter.new
     assert_equal '..', writer.converter.get_middle_line('a')
-    assert_equal '..', writer.converter.mid
   end
 
   def test_converts_single_letter_to_bottom_line_of_braille
     writer = NightWriter.new
     assert_equal '..', writer.converter.get_bottom_line('a')
-    assert_equal '..', writer.converter.bot
   end
 
   def test_detects_a_capital_letter
@@ -113,9 +110,6 @@ class ConverterTest < Minitest::Test
     assert_equal '..00', writer.converter.get_top_line('N')
     assert_equal '...0', writer.converter.get_middle_line('N')
     assert_equal '.00.', writer.converter.get_bottom_line('N')
-    assert_equal '..00', writer.converter.top
-    assert_equal '...0', writer.converter.mid
-    assert_equal '.00.', writer.converter.bot
   end
 
   def test_does_not_add_a_shift_character_if_letter_is_lowercase
@@ -123,9 +117,6 @@ class ConverterTest < Minitest::Test
     assert_equal '00', writer.converter.get_top_line('n')
     assert_equal '.0', writer.converter.get_middle_line('n')
     assert_equal '0.', writer.converter.get_bottom_line('n')
-    assert_equal '00', writer.converter.top
-    assert_equal '.0', writer.converter.mid
-    assert_equal '0.', writer.converter.bot
   end
 
   def test_can_write_a_space
@@ -134,8 +125,5 @@ class ConverterTest < Minitest::Test
     assert_equal '..', writer.converter.get_top_line(' ')
     assert_equal '..', writer.converter.get_middle_line(' ')
     assert_equal '..', writer.converter.get_bottom_line(' ')
-    assert_equal '..', writer.converter.top
-    assert_equal '..', writer.converter.mid
-    assert_equal '..', writer.converter.bot
   end
 end

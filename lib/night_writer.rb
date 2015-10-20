@@ -56,12 +56,6 @@ class Converter
 
   SPACE = '..'
 
-  def initialize
-    @top = ''
-    @mid = ''
-    @bot = ''
-  end
-
   def find_braille_match(line, letter)
     line.find { |k, v| k.to_s.include?(letter) }
   end
@@ -76,33 +70,25 @@ class Converter
     byte == 32
   end
 
-  def add_shift_character(position)
-    case position
-    when :top
-      @top << SHIFT[0].first
-    when :middle
-      @mid << SHIFT[1].first
-    when :bottom
-      @bot << SHIFT[2].first
-    end
-  end
-
   def get_top_line(letter)
-    @top << SPACE if space?(letter)
-    add_shift_character(:top) if capital?(letter)
-    @top << find_braille_match(TOP_LINE, letter.downcase).last
+    return SPACE if space?(letter)
+    top = ''
+    top << SHIFT[0].first if capital?(letter)
+    top << find_braille_match(TOP_LINE, letter.downcase).last
   end
 
   def get_middle_line(letter)
-    @mid << SPACE if space?(letter)
-    add_shift_character(:middle) if capital?(letter)
-    @mid << find_braille_match(MIDDLE_LINE, letter.downcase).last
+    return SPACE if space?(letter)
+    middle = ''
+    middle << SHIFT[1].first if capital?(letter)
+    middle << find_braille_match(MIDDLE_LINE, letter.downcase).last
   end
 
   def get_bottom_line(letter)
-    @bot << SPACE if space?(letter)
-    add_shift_character(:bottom) if capital?(letter)
-    @bot << find_braille_match(BOTTOM_LINE, letter.downcase).last
+    return SPACE if space?(letter)
+    bottom = ''
+    bottom << SHIFT[2].first if capital?(letter)
+    bottom << find_braille_match(BOTTOM_LINE, letter.downcase).last
   end
 end
 
