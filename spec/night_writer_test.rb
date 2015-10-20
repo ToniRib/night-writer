@@ -93,6 +93,18 @@ class NightWriterTest < Minitest::Test
     assert_equal middle, writer.middle_line
     assert_equal bottom, writer.bottom_line
   end
+
+  def test_splits_string_into_80_char_arrays
+    writer = NightWriter.new
+    str = 'aaaaaaaaaabbbbbbbbbbccccccccccdddddddddd' +
+          'eeeeeeeeeeffffffffffgggggggggghhhhhhhhhh' +
+          'iiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllll'
+    broken_str = ['aaaaaaaaaabbbbbbbbbbccccccccccdddddddddd' +
+                  'eeeeeeeeeeffffffffffgggggggggghhhhhhhhhh',
+                  'iiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllll'
+    ]
+    assert_equal broken_str, writer.split_long_lines(str)
+  end
 end
 
 class ConverterTest < Minitest::Test

@@ -42,6 +42,12 @@ class NightWriter
       bottom_line << braille[:bottom]
     end
   end
+
+  def split_long_lines(str)
+    str.chars.each_slice(80).to_a.map do |slice|
+      slice.join
+    end
+  end
 end
 
 class Converter
