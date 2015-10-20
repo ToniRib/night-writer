@@ -52,6 +52,8 @@ class Converter
                   uvxyz: '00'
   }
 
+  SHIFT = [['..'], ['..'], ['.0']]
+
   def initialize
     @top = ''
     @mid = ''
@@ -67,16 +69,30 @@ class Converter
     (65..90).to_a.include?(byte)
   end
 
+  def add_shift_character(position)
+    case position
+    when :top
+      @top << SHIFT[0].first
+    when :middle
+      @mid << SHIFT[1].first
+    when :bottom
+      @bot << SHIFT[2].first
+    end
+  end
+
   def get_top_line(letter)
-    @top << find_braille_match(TOP_LINE, letter).last
+    add_shift_character(:top) if capital?(letter)
+    @top << find_braille_match(TOP_LINE, letter.downcase).last
   end
 
   def get_middle_line(letter)
-    @mid << find_braille_match(MIDDLE_LINE, letter).last
+    add_shift_character(:middle) if capital?(letter)
+    @mid << find_braille_match(MIDDLE_LINE, letter.downcase).last
   end
 
   def get_bottom_line(letter)
-    @bot << find_braille_match(BOTTOM_LINE, letter).last
+    add_shift_character(:bottom) if capital?(letter)
+    @bot << find_braille_match(BOTTOM_LINE, letter.downcase).last
   end
 end
 

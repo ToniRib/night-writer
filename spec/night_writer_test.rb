@@ -92,4 +92,19 @@ class ConverterTest < Minitest::Test
     writer = NightWriter.new
     assert writer.converter.capital?('A')
   end
+
+  def test_rejects_a_lowercase_letter
+    writer = NightWriter.new
+    refute writer.converter.capital?('a')
+  end
+
+  def test_adds_a_shift_character_if_letter_is_capital
+    writer = NightWriter.new
+    assert_equal '..00', writer.converter.get_top_line('N')
+    assert_equal '...0', writer.converter.get_middle_line('N')
+    assert_equal '.00.', writer.converter.get_bottom_line('N')
+    assert_equal '..00', writer.converter.top
+    assert_equal '...0', writer.converter.mid
+    assert_equal '.00.', writer.converter.bot
+  end
 end
