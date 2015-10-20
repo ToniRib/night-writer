@@ -41,7 +41,6 @@ class NightWriter
       middle_line << braille[:middle]
       bottom_line << braille[:bottom]
     end
-    # binding.pry
   end
 end
 
@@ -121,17 +120,19 @@ class FileReader
 end
 
 class FileWriter
-  def write(text)
-      filename = ARGV[1]
-      outfile = File.open(filename, 'w')
-      outfile.write(text)
-      outfile.write(text)
-      outfile.write(text)
-      outfile.close
+  def write(top, middle, bottom)
+    filename = ARGV[1]
+    outfile = File.open(filename, 'w')
+    outfile.write(top << "\n")
+    outfile.write(middle << "\n")
+    outfile.write(bottom << "\n")
+    outfile.close
   end
 end
 
-# writer = NightWriter.new
-# text = writer.file_reader.read
-# writer.file_writer.write(text)
-# puts "Created #{ARGV[1]} containing #{writer.count_all_chars(text)} characters"
+writer = NightWriter.new
+text = writer.file_reader.read
+writer.convert_text_to_braille(text)
+
+writer.file_writer.write(writer.top_line, writer.middle_line, writer.bottom_line)
+puts "Created #{ARGV[1]} containing #{writer.count_all_chars(text)} characters"
