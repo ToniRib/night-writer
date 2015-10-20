@@ -16,26 +16,21 @@ class NightWriter
     @bottom_line = ''
   end
 
-  def count_lower(str)
-    str.chars.count do |char|
-      lower?(char)
-    end
-  end
-
   def count_capital(str)
     str.chars.count do |char|
       capital?(char)
     end
   end
 
-  def count_spaces(str)
+  def count_non_capital(str)
     str.chars.count do |char|
-      space?(char)
+      !capital?(char)
     end
   end
 
   def count_all_chars(str)
-    count_capital(str) * 2 + count_lower(str) + count_spaces(str)
+    str = add_number_switch_chars(str)
+    count_capital(str) * 2 + count_non_capital(str)
   end
 
   # TODO: refactor this

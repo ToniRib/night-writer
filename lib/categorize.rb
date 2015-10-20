@@ -22,4 +22,9 @@ module Categorize
   def switch?(char)
     convert_to_byte(char) == 36
   end
+
+  def punctuation?(char)
+    # ! ' , - . ?
+    [33, 39, 44, 45, 46, 63].include?(convert_to_byte(char))
+  end
 end

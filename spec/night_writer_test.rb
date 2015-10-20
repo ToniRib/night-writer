@@ -7,7 +7,7 @@ require 'pry'
 class NightWriterTest < Minitest::Test
   def test_returns_zero_lower_case_chars_if_string_is_empty
     writer = NightWriter.new
-    assert_equal 0, writer.count_lower('')
+    assert_equal 0, writer.count_non_capital('')
   end
 
   def test_returns_zero_upper_case_chars_if_string_is_empty
@@ -17,22 +17,17 @@ class NightWriterTest < Minitest::Test
 
   def test_counts_number_of_lower_case_characters
     writer = NightWriter.new
-    assert_equal 5, writer.count_lower('abcde')
-  end
-
-  def test_does_not_include_backtick_or_left_curly_brace_in_count
-    writer = NightWriter.new
-    assert_equal 1, writer.count_lower('`a{')
+    assert_equal 5, writer.count_non_capital('abcde')
   end
 
   def test_counts_entire_range_of_lower_chars
     writer = NightWriter.new
-    assert_equal 2, writer.count_lower('az')
+    assert_equal 2, writer.count_non_capital('az')
   end
 
   def test_counts_lower_characters_in_mixed_string
     writer = NightWriter.new
-    assert_equal 2, writer.count_lower('ABCDEfg')
+    assert_equal 2, writer.count_non_capital('ABCDEfg')
   end
 
   def test_counts_number_of_upper_case_characters
@@ -60,14 +55,20 @@ class NightWriterTest < Minitest::Test
     assert_equal 9, writer.count_all_chars('AbCdEf')
   end
 
-  def test_counts_number_of_spaces
+  def test_includes_spaces_in_count
     writer = NightWriter.new
-    assert_equal 2, writer.count_spaces('hello there toni')
+    assert_equal 16, writer.count_all_chars('hello there toni')
   end
 
   def test_counts_all_spaces_shifts_and_chars
     writer = NightWriter.new
     assert_equal 18, writer.count_all_chars('Hello there Toni')
+  end
+
+  def test_counts_all_shift_and_switch_chars_that_will_be_added
+    writer = NightWriter.new
+    str = "Hello Toni! How's it going? You are 26 today."
+    assert_equal 50, writer.count_all_chars(str)
   end
 
   def test_adds_dollar_sign_in_front_of_single_digit
