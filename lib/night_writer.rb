@@ -16,25 +16,25 @@ class NightWriter
   end
 
   def count_lower(str)
-    str.each_byte.count do |num|
-      (97..122).to_a.include?(num)
+    str.chars.count do |char|
+      lower?(char)
     end
   end
 
-  def count_upper(str)
-    str.each_byte.count do |num|
-      (65..90).to_a.include?(num)
+  def count_capital(str)
+    str.chars.count do |char|
+      capital?(char)
     end
   end
 
   def count_spaces(str)
-    str.each_byte.count do |num|
-      num == 32
+    str.chars.count do |char|
+      space?(char)
     end
   end
 
   def count_all_chars(str)
-    count_upper(str) * 2 + count_lower(str) + count_spaces(str)
+    count_capital(str) * 2 + count_lower(str) + count_spaces(str)
   end
 
   def add_number_switch_chars(str)
@@ -47,14 +47,6 @@ class NightWriter
       end
     end.join
   end
-  #
-  # def number?(char)
-  #   (48..57).to_a.include?(char.bytes.first)
-  # end
-  #
-  # def space?(char)
-  #   convert_to_byte(letter) == 32
-  # end
 
   def convert_text_to_braille(str)
     str.chars.each do |char|
@@ -100,18 +92,6 @@ class Converter
   def find_braille_match(line, letter)
     line.find { |k, v| k.include?(letter) }
   end
-
-  # def capital?(letter)
-  #   (65..90).to_a.include?(convert_to_byte(letter))
-  # end
-  #
-  # def space?(letter)
-  #   convert_to_byte(letter) == 32
-  # end
-  #
-  # def convert_to_byte(letter)
-  #   letter.bytes.first
-  # end
 
   def get_top_line(letter)
     return SPACE if space?(letter)

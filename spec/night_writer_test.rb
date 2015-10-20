@@ -12,7 +12,7 @@ class NightWriterTest < Minitest::Test
 
   def test_returns_zero_upper_case_chars_if_string_is_empty
     writer = NightWriter.new
-    assert_equal 0, writer.count_upper('')
+    assert_equal 0, writer.count_capital('')
   end
 
   def test_counts_number_of_lower_case_characters
@@ -37,22 +37,22 @@ class NightWriterTest < Minitest::Test
 
   def test_counts_number_of_upper_case_characters
     writer = NightWriter.new
-    assert_equal 5, writer.count_upper('ABCDE')
+    assert_equal 5, writer.count_capital('ABCDE')
   end
 
   def test_counts_entire_range_of_upper_chars
     writer = NightWriter.new
-    assert_equal 2, writer.count_upper('AZ')
+    assert_equal 2, writer.count_capital('AZ')
   end
 
   def test_does_not_include_at_or_left_square_bracket_in_count
     writer = NightWriter.new
-    assert_equal 1, writer.count_upper('@A[')
+    assert_equal 1, writer.count_capital('@A[')
   end
 
   def test_counts_upper_characters_in_mixed_string
     writer = NightWriter.new
-    assert_equal 5, writer.count_upper('ABCDEfg')
+    assert_equal 5, writer.count_capital('ABCDEfg')
   end
 
   def test_counts_number_of_characters_plus_shifts
