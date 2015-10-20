@@ -70,6 +70,19 @@ class NightWriterTest < Minitest::Test
     assert_equal 18, writer.count_all_chars('Hello there Toni')
   end
 
+  def test_adds_dollar_sign_in_front_of_single_digit
+    writer = NightWriter.new
+    assert_equal '$1', writer.add_number_switch_chars('1')
+  end
+
+  def test_adds_dollar_sign_for_number_switch_character
+    skip
+    writer = NightWriter.new
+    str = "This 1234 is 456 a23 string 1 with numbers."
+    switch_str = "This $1234 is $456 a$23 string $1 with numbers."
+    assert_equal switch_str, writer.add_number_switch_chars(str)
+  end
+
   def test_converts_lower_case_string_to_three_lines_of_braille
     writer = NightWriter.new
     top = '0.0.0.0.0.'
@@ -94,12 +107,12 @@ class NightWriterTest < Minitest::Test
     assert_equal bottom, writer.bottom_line
   end
 
-  def test_splits_string_into_80_char_arrays
+  def test_splits_string_into_40_char_arrays
     writer = NightWriter.new
     str = 'aaaaaaaaaabbbbbbbbbbccccccccccdddddddddd' +
           'eeeeeeeeeeffffffffffgggggggggghhhhhhhhhh' +
           'iiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllll'
-    broken_str = ['aaaaaaaaaabbbbbbbbbbccccccccccdddddddddd' +
+    broken_str = ['aaaaaaaaaabbbbbbbbbbccccccccccdddddddddd',
                   'eeeeeeeeeeffffffffffgggggggggghhhhhhhhhh',
                   'iiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllll'
     ]

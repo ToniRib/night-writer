@@ -1,6 +1,9 @@
 require 'pry'
+require_relative 'categorize'
 
 class NightWriter
+  include Categorize
+
   attr_reader :file_reader, :file_writer, :converter, :top_line, :middle_line, :bottom_line
 
   def initialize
@@ -34,6 +37,25 @@ class NightWriter
     count_upper(str) * 2 + count_lower(str) + count_spaces(str)
   end
 
+  def add_number_switch_chars(str)
+    # binding.pry
+    num_trigger = false
+    str.chars.map do |char|
+      if number?(char)
+        num_trigger = true
+        char.prepend('$')
+      end
+    end.join
+  end
+  #
+  # def number?(char)
+  #   (48..57).to_a.include?(char.bytes.first)
+  # end
+  #
+  # def space?(char)
+  #   convert_to_byte(letter) == 32
+  # end
+
   def convert_text_to_braille(str)
     str.chars.each do |char|
       braille = converter.get_all_lines(char)
@@ -44,13 +66,15 @@ class NightWriter
   end
 
   def split_long_lines(str)
-    str.chars.each_slice(80).to_a.map do |slice|
+    str.chars.each_slice(40).to_a.map do |slice|
       slice.join
     end
   end
 end
 
 class Converter
+  include Categorize
+
   TOP_LINE = { "abehkloruvz" => '0.',
                "ijstw" => '.0',
                "cdfgmnpqxy" => '00',
@@ -77,17 +101,17 @@ class Converter
     line.find { |k, v| k.include?(letter) }
   end
 
-  def capital?(letter)
-    (65..90).to_a.include?(convert_to_byte(letter))
-  end
-
-  def space?(letter)
-    convert_to_byte(letter) == 32
-  end
-
-  def convert_to_byte(letter)
-    letter.bytes.first
-  end
+  # def capital?(letter)
+  #   (65..90).to_a.include?(convert_to_byte(letter))
+  # end
+  #
+  # def space?(letter)
+  #   convert_to_byte(letter) == 32
+  # end
+  #
+  # def convert_to_byte(letter)
+  #   letter.bytes.first
+  # end
 
   def get_top_line(letter)
     return SPACE if space?(letter)
