@@ -81,6 +81,18 @@ class NightWriterTest < Minitest::Test
     assert_equal middle, writer.middle_line
     assert_equal bottom, writer.bottom_line
   end
+
+  def test_converts_entire_string_to_three_lines_of_braille
+    writer = NightWriter.new
+    top = '..0.0.0.0.0......00.00.0'
+    middle = '..00.00.0..0....00.0.00.'
+    bottom = '.0....0.0.0....00.0.0...'
+    str = 'Hello Toni'
+    writer.convert_text_to_braille(str)
+    assert_equal top, writer.top_line
+    assert_equal middle, writer.middle_line
+    assert_equal bottom, writer.bottom_line
+  end
 end
 
 class ConverterTest < Minitest::Test
