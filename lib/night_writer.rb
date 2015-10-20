@@ -35,21 +35,23 @@ class NightWriter
     count_capital(str) * 2 + count_non_capital(str)
   end
 
-  # TODO: refactor this
   def add_number_switch_chars(str)
-    num_trigger = false
-    new_str = str.chars.map do |char|
-      if number?(char) && num_trigger == false
-        num_trigger = true
-        char.prepend('$')
-      elsif space?(char) && num_trigger == true
-        num_trigger = false
-        char
-      else
-        char
-      end
+    str.split.map do |word|
+      add_switch_to_word_if_necessary(word)
+    end.join(' ')
+  end
+
+  def add_switch_to_word_if_necessary(word)
+    if word =~ /\d/
+      idx = find_first_number_index(word)
+      word.chars.insert(idx, '$').join
+    else
+      word
     end
-    new_str.join
+  end
+
+  def find_first_number_index(word)
+    word.chars.find_index { |char| number?(char) }
   end
 
   def convert_text_to_braille(str)

@@ -71,6 +71,21 @@ class NightWriterTest < Minitest::Test
     assert_equal 50, writer.count_all_chars(str)
   end
 
+  def test_adds_switch_to_word_that_includes_number
+    writer = NightWriter.new
+    assert_equal 'a$123', writer.add_switch_to_word_if_necessary('a123')
+  end
+
+  def test_does_not_add_switch_to_word_without_number
+    writer = NightWriter.new
+    assert_equal 'abc', writer.add_switch_to_word_if_necessary('abc')
+  end
+
+  def test_finds_index_of_first_number_in_word
+    writer = NightWriter.new
+    assert_equal 1, writer.find_first_number_index('a123')
+  end
+
   def test_adds_dollar_sign_in_front_of_single_digit
     writer = NightWriter.new
     assert_equal '$1', writer.add_number_switch_chars('1')
