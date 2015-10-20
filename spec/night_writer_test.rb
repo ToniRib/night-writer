@@ -76,7 +76,6 @@ class NightWriterTest < Minitest::Test
   end
 
   def test_adds_dollar_sign_for_number_switch_character
-    skip
     writer = NightWriter.new
     str = "This 1234 is 456 a23 string 1 with numbers."
     switch_str = "This $1234 is $456 a$23 string $1 with numbers."

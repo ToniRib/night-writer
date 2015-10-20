@@ -40,12 +40,19 @@ class NightWriter
   def add_number_switch_chars(str)
     # binding.pry
     num_trigger = false
-    str.chars.map do |char|
-      if number?(char)
+    new_str = str.chars.map do |char|
+      if number?(char) && num_trigger == false
+        # binding.pry
         num_trigger = true
         char.prepend('$')
+      elsif space?(char) && num_trigger == true
+        num_trigger = false
+        char
+      else
+        char
       end
-    end.join
+    end
+    new_str.join
   end
 
   def convert_text_to_braille(str)
