@@ -1,12 +1,15 @@
 require 'pry'
 
 class NightWriter
-  attr_reader :file_reader, :file_writer, :converter
+  attr_reader :file_reader, :file_writer, :converter, :top_line, :middle_line, :bottom_line
 
   def initialize
     @file_reader = FileReader.new
     @file_writer = FileWriter.new
     @converter = Converter.new
+    @top_line = ''
+    @middle_line = ''
+    @bottom_line = ''
   end
 
   def count_lower(str)
@@ -30,11 +33,19 @@ class NightWriter
   def count_all_chars(str)
     count_upper(str) * 2 + count_lower(str) + count_spaces(str)
   end
+
+  def convert_text_to_braille(str)
+    str.chars.each do |char|
+      braille = converter.get_all_lines(char)
+      top_line << braille[:top]
+      middle_line << braille[:middle]
+      bottom_line << braille[:bottom]
+    end
+    # binding.pry
+  end
 end
 
 class Converter
-  attr_reader :top, :mid, :bot
-
   TOP_LINE = { abehkloruvz: '0.',
                ijstw: '.0',
                cdfgmnpqxy: '00'

@@ -2,6 +2,8 @@ require 'minitest'
 require 'minitest/pride'
 require './lib/night_writer'
 
+require 'pry'
+
 class NightWriterTest < Minitest::Test
   def test_returns_zero_lower_case_chars_if_string_is_empty
     writer = NightWriter.new
@@ -66,6 +68,18 @@ class NightWriterTest < Minitest::Test
   def test_counts_all_spaces_shifts_and_chars
     writer = NightWriter.new
     assert_equal 18, writer.count_all_chars('Hello there Toni')
+  end
+
+  def test_converts_lower_case_string_to_three_lines_of_braille
+    writer = NightWriter.new
+    top = '0.0.0.0.0.'
+    middle = '00.00.0..0'
+    bottom = '....0.0.0.'
+    str = 'hello'
+    writer.convert_text_to_braille(str)
+    assert_equal top, writer.top_line
+    assert_equal middle, writer.middle_line
+    assert_equal bottom, writer.bottom_line
   end
 end
 
