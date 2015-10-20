@@ -56,6 +56,7 @@ class NightWriter
   end
 
   def convert_text_to_braille(str)
+    str = add_number_switch_chars(str)
     str.chars.each do |char|
       braille = converter.get_all_lines(char)
       top_line << braille[:top]
@@ -92,7 +93,6 @@ end
 if __FILE__==$0
   writer = NightWriter.new
   text = writer.file_reader.read
-  text = writer.add_number_switch_chars(text)
   writer.convert_text_to_braille(text)
 
   writer.file_writer.write(writer.top_line, writer.middle_line, writer.bottom_line)

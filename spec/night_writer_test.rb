@@ -112,8 +112,7 @@ class NightWriterTest < Minitest::Test
     middle = '..00.00.0..0....00.0.00....0........0..00.'
     bottom = '.0....0.0.0....00.0.0.....00..........00..'
     str = 'Hello Toni 1 a b2'
-    text = writer.add_number_switch_chars(str)
-    writer.convert_text_to_braille(text)
+    writer.convert_text_to_braille(str)
     assert_equal top, writer.top_line
     assert_equal middle, writer.middle_line
     assert_equal bottom, writer.bottom_line
