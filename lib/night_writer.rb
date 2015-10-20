@@ -45,21 +45,21 @@ class NightWriter
 end
 
 class Converter
-  TOP_LINE = { abehkloruvz: '0.',
-               ijstw: '.0',
-               cdfgmnpqxy: '00'
+  TOP_LINE = { "abehkloruvz" => '0.',
+               "ijstw" => '.0',
+               "cdfgmnpqxy" => '00'
   }
 
-  MIDDLE_LINE = { ackmux: '..',
-                  bfilpsv: '0.',
-                  denoyz: '.0',
-                  ghjqrtw: '00'
+  MIDDLE_LINE = { "ackmux" => '..',
+                  "bfilpsv" => '0.',
+                  "denoyz" => '.0',
+                  "ghjqrtw" => '00'
   }
 
-  BOTTOM_LINE = { abcdefghij: '..',
-                  klmnopqrst: '0.',
-                  w: '.0',
-                  uvxyz: '00'
+  BOTTOM_LINE = { "abcdefghij" => '..',
+                  "klmnopqrst" => '0.',
+                  "w" => '.0',
+                  "uvxyz" => '00'
   }
 
   SHIFT = [['..'], ['..'], ['.0']]
@@ -67,7 +67,7 @@ class Converter
   SPACE = '..'
 
   def find_braille_match(line, letter)
-    line.find { |k, v| k.to_s.include?(letter) }
+    line.find { |k, v| k.include?(letter) }
   end
 
   def capital?(letter)
@@ -130,9 +130,11 @@ class FileWriter
   end
 end
 
-writer = NightWriter.new
-text = writer.file_reader.read
-writer.convert_text_to_braille(text)
+if __FILE__==$0
+  writer = NightWriter.new
+  text = writer.file_reader.read
+  writer.convert_text_to_braille(text)
 
-writer.file_writer.write(writer.top_line, writer.middle_line, writer.bottom_line)
-puts "Created #{ARGV[1]} containing #{writer.count_all_chars(text)} characters"
+  writer.file_writer.write(writer.top_line, writer.middle_line, writer.bottom_line)
+  puts "Created #{ARGV[1]} containing #{writer.count_all_chars(text)} characters"
+end
