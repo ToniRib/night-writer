@@ -58,10 +58,17 @@ class NightWriter
       middle_line << braille[:middle]
       bottom_line << braille[:bottom]
     end
+    split_all_lines
+  end
+
+  def split_all_lines
+    @top_line = split_long_lines(@top_line)
+    @middle_line = split_long_lines(@middle_line)
+    @bottom_line = split_long_lines(@bottom_line)
   end
 
   def split_long_lines(str)
-    str.chars.each_slice(40).to_a.map do |slice|
+    str.chars.each_slice(80).to_a.map do |slice|
       slice.join
     end
   end
@@ -89,6 +96,7 @@ if __FILE__ == $0
   writer = NightWriter.new
   text = writer.file_reader.read
   writer.convert_text_to_braille(text)
+  binding.pry
 
   writer.file_writer.write(writer.top_line, writer.middle_line, writer.bottom_line)
   puts "Created #{ARGV[1]} containing #{writer.count_all_chars(text)} characters"

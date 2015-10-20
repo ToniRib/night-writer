@@ -90,9 +90,9 @@ class NightWriterTest < Minitest::Test
     bottom = '....0.0.0.'
     str = 'hello'
     writer.convert_text_to_braille(str)
-    assert_equal top, writer.top_line
-    assert_equal middle, writer.middle_line
-    assert_equal bottom, writer.bottom_line
+    assert_equal top, writer.top_line.first
+    assert_equal middle, writer.middle_line.first
+    assert_equal bottom, writer.bottom_line.first
   end
 
   def test_converts_entire_string_to_three_lines_of_braille
@@ -102,9 +102,9 @@ class NightWriterTest < Minitest::Test
     bottom = '.0....0.0.0....00.0.0...'
     str = 'Hello Toni'
     writer.convert_text_to_braille(str)
-    assert_equal top, writer.top_line
-    assert_equal middle, writer.middle_line
-    assert_equal bottom, writer.bottom_line
+    assert_equal top, writer.top_line.first
+    assert_equal middle, writer.middle_line.first
+    assert_equal bottom, writer.bottom_line.first
   end
 
   def test_converts_string_with_numbers_into_three_lines_of_braille
@@ -114,17 +114,17 @@ class NightWriterTest < Minitest::Test
     bottom = '.0....0.0.0....00.0.0.....00..........00..'
     str = 'Hello Toni 1 a b2'
     writer.convert_text_to_braille(str)
-    assert_equal top, writer.top_line
-    assert_equal middle, writer.middle_line
-    assert_equal bottom, writer.bottom_line
+    assert_equal top, writer.top_line.first
+    assert_equal middle, writer.middle_line.first
+    assert_equal bottom, writer.bottom_line.first
   end
 
-  def test_splits_string_into_40_char_arrays
+  def test_splits_string_into_80_char_arrays
     writer = NightWriter.new
     str = 'aaaaaaaaaabbbbbbbbbbccccccccccdddddddddd' +
           'eeeeeeeeeeffffffffffgggggggggghhhhhhhhhh' +
           'iiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllll'
-    broken_str = ['aaaaaaaaaabbbbbbbbbbccccccccccdddddddddd',
+    broken_str = ['aaaaaaaaaabbbbbbbbbbccccccccccdddddddddd' +
                   'eeeeeeeeeeffffffffffgggggggggghhhhhhhhhh',
                   'iiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllll'
     ]
