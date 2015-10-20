@@ -18,4 +18,8 @@ module Categorize
   def lower?(char)
     (97..122).to_a.include?(convert_to_byte(char))
   end
+
+  def switch?(char)
+    convert_to_byte(char) == 36
+  end
 end

@@ -37,12 +37,11 @@ class NightWriter
     count_capital(str) * 2 + count_lower(str) + count_spaces(str)
   end
 
+  # TODO: refactor this
   def add_number_switch_chars(str)
-    # binding.pry
     num_trigger = false
     new_str = str.chars.map do |char|
       if number?(char) && num_trigger == false
-        # binding.pry
         num_trigger = true
         char.prepend('$')
       elsif space?(char) && num_trigger == true
@@ -96,19 +95,27 @@ class Converter
 
   SPACE = '..'
 
+  SWITCH = [['.0'], ['.0'], ['00']]
+
   def find_braille_match(line, letter)
     line.find { |k, v| k.include?(letter) }
   end
 
   def get_top_line(letter)
     return SPACE if space?(letter)
+    if switch?(letter)
+      binding.pry
+      return SWITCH[0].first
+    end
     top = ''
     top << SHIFT[0].first if capital?(letter)
+    # binding.pry
     top << find_braille_match(TOP_LINE, letter.downcase).last
   end
 
   def get_middle_line(letter)
     return SPACE if space?(letter)
+    return SWITCH[1].first if switch?(letter)
     middle = ''
     middle << SHIFT[1].first if capital?(letter)
     middle << find_braille_match(MIDDLE_LINE, letter.downcase).last
@@ -116,6 +123,7 @@ class Converter
 
   def get_bottom_line(letter)
     return SPACE if space?(letter)
+    return SWITCH[2].first if switch?(letter)
     bottom = ''
     bottom << SHIFT[2].first if capital?(letter)
     bottom << find_braille_match(BOTTOM_LINE, letter.downcase).last
@@ -151,6 +159,7 @@ end
 if __FILE__==$0
   writer = NightWriter.new
   text = writer.file_reader.read
+  text = writer.add_number_switch_chars(text)
   writer.convert_text_to_braille(text)
 
   writer.file_writer.write(writer.top_line, writer.middle_line, writer.bottom_line)

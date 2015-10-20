@@ -106,6 +106,20 @@ class NightWriterTest < Minitest::Test
     assert_equal bottom, writer.bottom_line
   end
 
+  def test_converts_string_with_numbers_into_three_lines_of_braille
+    skip
+    writer = NightWriter.new
+    top = '..0.0.0.0.0......00.00.0...00...0..00.'
+    middle = '..00.00.0..0....00.0.00....0....0..00.'
+    bottom = '.0....0.0.0....00.0.0.....00......0000'
+    str = 'Hello Toni 1 a b2'
+    text = writer.add_number_switch_chars(str)
+    writer.convert_text_to_braille(text)
+    assert_equal top, writer.top_line
+    assert_equal middle, writer.middle_line
+    assert_equal bottom, writer.bottom_line
+  end
+
   def test_splits_string_into_40_char_arrays
     writer = NightWriter.new
     str = 'aaaaaaaaaabbbbbbbbbbccccccccccdddddddddd' +
@@ -153,6 +167,16 @@ class ConverterTest < Minitest::Test
   def test_rejects_a_non_space
     writer = NightWriter.new
     refute writer.converter.space?('a')
+  end
+
+  def test_detects_a_dollar_sign
+    writer = NightWriter.new
+    assert writer.converter.switch?('$')
+  end
+
+  def test_rejects_a_non_dollar_sign
+    writer = NightWriter.new
+    refute writer.converter.switch?('*')
   end
 
   def test_adds_a_shift_character_if_letter_is_capital
