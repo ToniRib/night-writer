@@ -100,5 +100,5 @@ if __FILE__ == $0
   writer.convert_text_to_braille(text)
 
   writer.file_writer.write(writer.top_line, writer.middle_line, writer.bottom_line)
-  puts "Created #{ARGV[1]} containing #{writer.count_all_chars(text)} characters"
+  puts "Created #{ARGV[1]} containing #{writer.count_all_chars(text)} braille characters"
 end
