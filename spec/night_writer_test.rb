@@ -107,11 +107,10 @@ class NightWriterTest < Minitest::Test
   end
 
   def test_converts_string_with_numbers_into_three_lines_of_braille
-    skip
     writer = NightWriter.new
-    top = '..0.0.0.0.0......00.00.0...00...0..00.'
-    middle = '..00.00.0..0....00.0.00....0....0..00.'
-    bottom = '.0....0.0.0....00.0.0.....00......0000'
+    top = '..0.0.0.0.0......00.00.0...00...0...0..00.'
+    middle = '..00.00.0..0....00.0.00....0........0..00.'
+    bottom = '.0....0.0.0....00.0.0.....00..........00..'
     str = 'Hello Toni 1 a b2'
     text = writer.add_number_switch_chars(str)
     writer.convert_text_to_braille(text)

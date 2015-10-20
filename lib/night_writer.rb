@@ -73,19 +73,19 @@ end
 class Converter
   include Categorize
 
-  TOP_LINE = { "abehkloruvz" => '0.',
-               "ijstw" => '.0',
-               "cdfgmnpqxy" => '00',
+  TOP_LINE = { "abehkloruvz1258" => '0.',
+               "ijstw09" => '.0',
+               "cdfgmnpqxy3467" => '00',
                "!',-.?" => '..'
   }
 
-  MIDDLE_LINE = { "ackmux'-" => '..',
-                  "bfilpsv,?" => '0.',
-                  "denoyz" => '.0',
-                  "ghjqrtw!." => '00'
+  MIDDLE_LINE = { "ackmux'-13" => '..',
+                  "bfilpsv,?269" => '0.',
+                  "denoyz45" => '.0',
+                  "ghjqrtw!.078" => '00'
   }
 
-  BOTTOM_LINE = { "abcdefghij," => '..',
+  BOTTOM_LINE = { "abcdefghij0123456789," => '..',
                   "klmnopqrst!'" => '0.',
                   "w." => '.0',
                   "uvxyz-?" => '00'
@@ -103,13 +103,9 @@ class Converter
 
   def get_top_line(letter)
     return SPACE if space?(letter)
-    if switch?(letter)
-      binding.pry
-      return SWITCH[0].first
-    end
+    return SWITCH[0].first if switch?(letter)
     top = ''
     top << SHIFT[0].first if capital?(letter)
-    # binding.pry
     top << find_braille_match(TOP_LINE, letter.downcase).last
   end
 
