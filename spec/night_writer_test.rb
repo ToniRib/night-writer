@@ -152,6 +152,13 @@ class ConverterTest < Minitest::Test
     assert_equal '..', writer.converter.get_bottom_line(' ')
   end
 
+  def test_can_write_an_exclamation_point
+    writer = NightWriter.new
+    assert_equal '..', writer.converter.get_top_line('!')
+    assert_equal '00', writer.converter.get_middle_line('!')
+    assert_equal '0.', writer.converter.get_bottom_line('!')
+  end
+
   def test_can_get_all_three_lines_for_lowercase_letter
     writer = NightWriter.new
     braille_hash = { top: '00', middle: '.0', bottom: '0.' }

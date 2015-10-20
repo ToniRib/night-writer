@@ -47,19 +47,20 @@ end
 class Converter
   TOP_LINE = { "abehkloruvz" => '0.',
                "ijstw" => '.0',
-               "cdfgmnpqxy" => '00'
+               "cdfgmnpqxy" => '00',
+               "!',-.?" => '..'
   }
 
-  MIDDLE_LINE = { "ackmux" => '..',
-                  "bfilpsv" => '0.',
+  MIDDLE_LINE = { "ackmux'-" => '..',
+                  "bfilpsv,?" => '0.',
                   "denoyz" => '.0',
-                  "ghjqrtw" => '00'
+                  "ghjqrtw!." => '00'
   }
 
-  BOTTOM_LINE = { "abcdefghij" => '..',
-                  "klmnopqrst" => '0.',
-                  "w" => '.0',
-                  "uvxyz" => '00'
+  BOTTOM_LINE = { "abcdefghij," => '..',
+                  "klmnopqrst!'" => '0.',
+                  "w." => '.0',
+                  "uvxyz-?" => '00'
   }
 
   SHIFT = [['..'], ['..'], ['.0']]
