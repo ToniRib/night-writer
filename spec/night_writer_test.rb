@@ -5,7 +5,7 @@ require './lib/night_writer'
 require 'pry'
 
 class NightWriterTest < Minitest::Test
-  def test_returns_zero_lower_case_chars_if_string_is_empty
+  def test_returns_zero_non_capital_chars_if_string_is_empty
     writer = NightWriter.new
     assert_equal 0, writer.count_non_capital('')
   end
@@ -15,17 +15,12 @@ class NightWriterTest < Minitest::Test
     assert_equal 0, writer.count_capital('')
   end
 
-  def test_counts_number_of_lower_case_characters
+  def test_counts_number_of_non_capital_characters
     writer = NightWriter.new
     assert_equal 5, writer.count_non_capital('abcde')
   end
 
-  def test_counts_entire_range_of_lower_chars
-    writer = NightWriter.new
-    assert_equal 2, writer.count_non_capital('az')
-  end
-
-  def test_counts_lower_characters_in_mixed_string
+  def test_counts_non_capital_characters_only_in_mixed_string
     writer = NightWriter.new
     assert_equal 2, writer.count_non_capital('ABCDEfg')
   end
@@ -45,7 +40,7 @@ class NightWriterTest < Minitest::Test
     assert_equal 1, writer.count_capital('@A[')
   end
 
-  def test_counts_upper_characters_in_mixed_string
+  def test_counts_upper_characters_only_in_mixed_string
     writer = NightWriter.new
     assert_equal 5, writer.count_capital('ABCDEfg')
   end
@@ -58,6 +53,11 @@ class NightWriterTest < Minitest::Test
   def test_includes_spaces_in_count
     writer = NightWriter.new
     assert_equal 16, writer.count_all_chars('hello there toni')
+  end
+
+  def test_includes_number_switch_character_in_count
+    writer = NightWriter.new
+    assert_equal 10, writer.count_all_chars('hello 123')
   end
 
   def test_counts_all_spaces_shifts_and_chars
