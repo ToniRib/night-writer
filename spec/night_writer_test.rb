@@ -120,10 +120,27 @@ class ConverterTest < Minitest::Test
   end
 
   def test_can_write_a_space
-    skip
     writer = NightWriter.new
     assert_equal '..', writer.converter.get_top_line(' ')
     assert_equal '..', writer.converter.get_middle_line(' ')
     assert_equal '..', writer.converter.get_bottom_line(' ')
+  end
+
+  def test_can_get_all_three_lines_for_lowercase_letter
+    writer = NightWriter.new
+    braille_hash = { top: '00', middle: '.0', bottom: '0.' }
+    assert_equal braille_hash, writer.converter.get_all_lines('n')
+  end
+
+  def test_can_get_all_three_lines_for_capital_letter
+    writer = NightWriter.new
+    braille_hash = { top: '..0.', middle: '...0', bottom: '.000' }
+    assert_equal braille_hash, writer.converter.get_all_lines('Z')
+  end
+
+  def test_can_get_all_three_lines_for_space
+    writer = NightWriter.new
+    braille_hash = { top: '..', middle: '..', bottom: '..' }
+    assert_equal braille_hash, writer.converter.get_all_lines(' ')
   end
 end

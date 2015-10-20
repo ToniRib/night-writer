@@ -61,13 +61,15 @@ class Converter
   end
 
   def capital?(letter)
-    byte = letter.bytes.first
-    (65..90).to_a.include?(byte)
+    (65..90).to_a.include?(convert_to_byte(letter))
   end
 
   def space?(letter)
-    byte = letter.bytes.first
-    byte == 32
+    convert_to_byte(letter) == 32
+  end
+
+  def convert_to_byte(letter)
+    letter.bytes.first
   end
 
   def get_top_line(letter)
@@ -89,6 +91,14 @@ class Converter
     bottom = ''
     bottom << SHIFT[2].first if capital?(letter)
     bottom << find_braille_match(BOTTOM_LINE, letter.downcase).last
+  end
+
+  def get_all_lines(letter)
+    top_line = get_top_line(letter)
+    middle_line = get_middle_line(letter)
+    bottom_line = get_bottom_line(letter)
+
+    { top: top_line, middle: middle_line, bottom: bottom_line }
   end
 end
 
