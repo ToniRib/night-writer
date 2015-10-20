@@ -98,6 +98,16 @@ class ConverterTest < Minitest::Test
     refute writer.converter.capital?('a')
   end
 
+  def test_detects_a_space
+    writer = NightWriter.new
+    assert writer.converter.space?(' ')
+  end
+
+  def test_rejects_a_non_space
+    writer = NightWriter.new
+    refute writer.converter.space?('a')
+  end
+
   def test_adds_a_shift_character_if_letter_is_capital
     writer = NightWriter.new
     assert_equal '..00', writer.converter.get_top_line('N')
@@ -116,5 +126,16 @@ class ConverterTest < Minitest::Test
     assert_equal '00', writer.converter.top
     assert_equal '.0', writer.converter.mid
     assert_equal '0.', writer.converter.bot
+  end
+
+  def test_can_write_a_space
+    skip
+    writer = NightWriter.new
+    assert_equal '..', writer.converter.get_top_line(' ')
+    assert_equal '..', writer.converter.get_middle_line(' ')
+    assert_equal '..', writer.converter.get_bottom_line(' ')
+    assert_equal '..', writer.converter.top
+    assert_equal '..', writer.converter.mid
+    assert_equal '..', writer.converter.bot
   end
 end

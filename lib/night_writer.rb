@@ -54,6 +54,8 @@ class Converter
 
   SHIFT = [['..'], ['..'], ['.0']]
 
+  SPACE = '..'
+
   def initialize
     @top = ''
     @mid = ''
@@ -69,6 +71,11 @@ class Converter
     (65..90).to_a.include?(byte)
   end
 
+  def space?(letter)
+    byte = letter.bytes.first
+    byte == 32
+  end
+
   def add_shift_character(position)
     case position
     when :top
@@ -81,16 +88,19 @@ class Converter
   end
 
   def get_top_line(letter)
+    @top << SPACE if space?(letter)
     add_shift_character(:top) if capital?(letter)
     @top << find_braille_match(TOP_LINE, letter.downcase).last
   end
 
   def get_middle_line(letter)
+    @mid << SPACE if space?(letter)
     add_shift_character(:middle) if capital?(letter)
     @mid << find_braille_match(MIDDLE_LINE, letter.downcase).last
   end
 
   def get_bottom_line(letter)
+    @bot << SPACE if space?(letter)
     add_shift_character(:bottom) if capital?(letter)
     @bot << find_braille_match(BOTTOM_LINE, letter.downcase).last
   end
