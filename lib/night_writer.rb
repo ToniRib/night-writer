@@ -1,6 +1,8 @@
 require 'pry'
 require_relative 'categorize'
 require_relative 'converter'
+require_relative 'braille_file_writer'
+require_relative 'file_reader'
 
 class NightWriter
   include Categorize
@@ -9,7 +11,7 @@ class NightWriter
 
   def initialize
     @file_reader = FileReader.new
-    @file_writer = FileWriter.new
+    @file_writer = BrailleFileWriter.new
     @converter = Converter.new
     @top_line = ''
     @middle_line = ''
@@ -74,31 +76,11 @@ class NightWriter
   end
 end
 
-class FileReader
-  def read
-    filename = ARGV[0]
-    File.read(filename)
-  end
-end
-
-class FileWriter
-  def write(top, middle, bottom)
-    filename = ARGV[1]
-    outfile = File.open(filename, 'w')
-    top.length.times do |i|
-      outfile.write(top[i] << "\n")
-      outfile.write(middle[i] << "\n")
-      outfile.write(bottom[i] << "\n")
-    end
-    outfile.close
-  end
-end
-
 if __FILE__ == $0
-  writer = NightWriter.new
-  text = writer.file_reader.read
-  writer.convert_text_to_braille(text)
+  nw = NightWriter.new
+  text = nw.file_reader.read
+  nw.convert_text_to_braille(text)
 
-  writer.file_writer.write(writer.top_line, writer.middle_line, writer.bottom_line)
-  puts "Created #{ARGV[1]} containing #{writer.count_all_chars(text)} braille characters"
+  nw.file_writer.write(nw.top_line, nw.middle_line, nw.bottom_line)
+  puts "Created #{ARGV[1]} containing #{nw.count_all_chars(text)} braille characters"
 end
