@@ -90,7 +90,7 @@ class FileWriter
   end
 end
 
-if __FILE__==$0
+if __FILE__ == $0
   writer = NightWriter.new
   text = writer.file_reader.read
   writer.convert_text_to_braille(text)

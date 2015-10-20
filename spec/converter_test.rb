@@ -95,4 +95,10 @@ class ConverterTest < Minitest::Test
     braille_hash = { top: '..', middle: '..', bottom: '..' }
     assert_equal braille_hash, converter.get_all_lines(' ')
   end
+
+  def test_can_get_all_three_lines_for_switch_dollar_sign
+    converter = Converter.new
+    braille_hash = { top: '.0', middle: '.0', bottom: '00' }
+    assert_equal braille_hash, converter.get_all_lines('$')
+  end
 end
