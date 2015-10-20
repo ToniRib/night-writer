@@ -37,8 +37,8 @@ class NightReader
     end
   end
 
-  def convert_braille_to_text
-
+  def convert_braille_to_text(str)
+    
   end
 end
 
