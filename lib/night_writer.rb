@@ -85,9 +85,11 @@ class FileWriter
   def write(top, middle, bottom)
     filename = ARGV[1]
     outfile = File.open(filename, 'w')
-    outfile.write(top << "\n")
-    outfile.write(middle << "\n")
-    outfile.write(bottom << "\n")
+    top.length.times do |i|
+      outfile.write(top[i] << "\n")
+      outfile.write(middle[i] << "\n")
+      outfile.write(bottom[i] << "\n")
+    end
     outfile.close
   end
 end
@@ -96,7 +98,6 @@ if __FILE__ == $0
   writer = NightWriter.new
   text = writer.file_reader.read
   writer.convert_text_to_braille(text)
-  binding.pry
 
   writer.file_writer.write(writer.top_line, writer.middle_line, writer.bottom_line)
   puts "Created #{ARGV[1]} containing #{writer.count_all_chars(text)} characters"
