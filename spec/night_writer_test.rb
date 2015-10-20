@@ -107,4 +107,14 @@ class ConverterTest < Minitest::Test
     assert_equal '...0', writer.converter.mid
     assert_equal '.00.', writer.converter.bot
   end
+
+  def test_does_not_add_a_shift_character_if_letter_is_lowercase
+    writer = NightWriter.new
+    assert_equal '00', writer.converter.get_top_line('n')
+    assert_equal '.0', writer.converter.get_middle_line('n')
+    assert_equal '0.', writer.converter.get_bottom_line('n')
+    assert_equal '00', writer.converter.top
+    assert_equal '.0', writer.converter.mid
+    assert_equal '0.', writer.converter.bot
+  end
 end
