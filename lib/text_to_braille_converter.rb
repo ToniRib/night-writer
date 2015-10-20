@@ -1,6 +1,6 @@
 require_relative 'categorize'
 
-class Converter
+class TextToBrailleConverter
   include Categorize
 
   TOP_LINE = { "abehkloruvz1258" => '0.',

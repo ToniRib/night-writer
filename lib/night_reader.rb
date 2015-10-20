@@ -19,6 +19,7 @@ class NightReader
     @text = ''
   end
 
+  # TODO: obviously need to refactor
   def reconstruct_braille_lines(str)
     split_str = str.split
     i = 1
@@ -34,6 +35,10 @@ class NightReader
         i = 1
       end
     end
+  end
+
+  def convert_braille_to_text
+    
   end
 end
 
