@@ -74,4 +74,15 @@ class NightReaderTest < Minitest::Test
     str = 'abcdefghij'
     assert_equal '1234567890', reader.convert_letters_to_numbers(str)
   end
+
+  def test_converts_braille_to_text
+    reader = NightReader.new
+    braille = "..0.0.0.0.0........00.00.0......0.0..0...0...0.0..000..00000......000.0...0.0...\n" +
+                "..00.00.0..00.....00.0.00.00....00.000..0...0.00..00.00..0000......0.0....00.0..\n" +
+                ".0....0.0.0......00.0.0...0....0..0..00.0.....0.....0...0...00...0000.000.0.....\n" +
+                ".00.00...00.000.00..\n.00.0...00.0.0...000\n00......0.0.....00.0\n"
+    text =  "Hello, Toni! How's it going? You're 26 today."
+    reader.convert_braille_to_text(braille)
+    assert_equal text, reader.text
+  end
 end

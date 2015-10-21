@@ -101,6 +101,8 @@ class NightReader
     top_line.length.times do
       @text << converter.get_character_from_braille(get_next_set)
     end
+    @text = correct_for_capitals(@text)
+    @text = correct_for_numbers(@text)
   end
 end
 
