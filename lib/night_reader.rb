@@ -41,6 +41,12 @@ class NightReader
     str.chars.each_slice(2).to_a.map { |slice| slice.join }
   end
 
+  def slice_all_lines(top, middle, bottom)
+    @top_line = slice_braille(top)
+    @middle_line = slice_braille(middle)
+    @bottom_line = slice_braille(bottom)
+  end
+
   def convert_braille_to_text(str)
 
   end

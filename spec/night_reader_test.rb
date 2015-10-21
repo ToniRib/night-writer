@@ -23,4 +23,18 @@ class NightReaderTest < Minitest::Test
     line_sliced = ['.0', '..', '.0', '.0']
     assert_equal line_sliced, reader.slice_braille(line)
   end
+
+  def test_slices_all_lines_into_sections_of_two
+    reader = NightReader.new
+    top = '0.0.0.0.0.'
+    middle = '00.00.0..0'
+    bottom = '....0.0.0.'
+    top_sliced = ['0.', '0.', '0.', '0.', '0.']
+    middle_sliced = ['00', '.0', '0.', '0.', '.0']
+    bottom_sliced = ['..', '..', '0.', '0.', '0.']
+    reader.slice_all_lines(top, middle, bottom)
+    assert_equal top_sliced, reader.top_line
+    assert_equal middle_sliced, reader.middle_line
+    assert_equal bottom_sliced, reader.bottom_line
+  end
 end
