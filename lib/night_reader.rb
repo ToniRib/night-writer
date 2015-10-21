@@ -1,7 +1,7 @@
 require 'pry'
 require_relative 'categorize'
 require_relative 'braille_to_text_converter'
-require_relative 'text_file_writer'
+require_relative 'file_writer'
 require_relative 'file_reader'
 
 class NightReader
@@ -23,7 +23,7 @@ class NightReader
 
   def initialize
     @file_reader = FileReader.new
-    @file_writer = TextFileWriter.new
+    @file_writer = FileWriter.new
     @converter = BrailleToTextConverter.new
     @top_line = ''
     @middle_line = ''
@@ -111,6 +111,6 @@ if __FILE__ == $0
   text = nr.file_reader.read
   nr.convert_braille_to_text(text)
 
-  nr.file_writer.write(nr.text)
+  nr.file_writer.write_text(nr.text)
   puts "Created #{ARGV[1]} containing #{nr.text.length} English characters"
 end
