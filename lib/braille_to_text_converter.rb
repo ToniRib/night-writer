@@ -19,9 +19,9 @@ class BrailleToTextConverter
 
   def get_character_from_braille(braille_set)
     matches = []
-    matches << find_possible_char_matches(TOP_LINE, braille_set[0].first)
-    matches << find_possible_char_matches(MIDDLE_LINE, braille_set[1].first)
-    matches << find_possible_char_matches(BOTTOM_LINE, braille_set[2].first)
+    matches << find_possible_char_matches(TOP_LINE, braille_set[0])
+    matches << find_possible_char_matches(MIDDLE_LINE, braille_set[1])
+    matches << find_possible_char_matches(BOTTOM_LINE, braille_set[2])
     find_common_character(matches)
   end
 
