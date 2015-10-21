@@ -1,6 +1,6 @@
 require 'pry'
 require_relative 'categorize'
-require_relative 'braille_to_text_converter'
+require_relative 'converter'
 require_relative 'file_writer'
 require_relative 'file_reader'
 
@@ -24,7 +24,7 @@ class NightReader
   def initialize
     @file_reader = FileReader.new
     @file_writer = FileWriter.new
-    @converter = BrailleToTextConverter.new
+    @converter = Converter.new
     @top_line = ''
     @middle_line = ''
     @bottom_line = ''

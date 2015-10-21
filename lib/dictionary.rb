@@ -32,14 +32,14 @@ class Dictionary
     end
   end
 
-  def lookup_text(line, letter)
+  def lookup_text(line, set)
     case line
     when :top
-      @top_line.invert.find { |k, v| k.include?(letter) }.last
+      @top_line.invert.find { |k, v| k.include?(set) }.last
     when :middle
-      @middle_line.invert.find { |k, v| k.include?(letter) }.last
+      @middle_line.invert.find { |k, v| k.include?(set) }.last
     when :bottom
-      @bottom_line.invert.find { |k, v| k.include?(letter) }.last
+      @bottom_line.invert.find { |k, v| k.include?(set) }.last
     end
   end
 end
