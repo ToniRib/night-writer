@@ -6,7 +6,8 @@ require_relative 'file_reader'
 class NightReader
   include Categorize
 
-  attr_reader :file_reader, :file_writer, :converter, :top_line, :middle_line, :bottom_line, :text
+  attr_reader :file_reader, :file_writer, :converter, :top_line,
+              :middle_line, :bottom_line, :text
 
   LETTER_TO_NUM = { 'a' => '1',
                     'b' => '2',
@@ -43,7 +44,6 @@ class NightReader
     str.chars.each_slice(2).to_a.map { |slice| slice.join }
   end
 
-  # Can this be run on the instance variables?
   def slice_all_lines(top, middle, bottom)
     @top_line = slice_braille(top)
     @middle_line = slice_braille(middle)

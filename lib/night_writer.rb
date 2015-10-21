@@ -6,7 +6,8 @@ require_relative 'file_reader'
 class NightWriter
   include Categorize
 
-  attr_reader :file_reader, :file_writer, :converter, :top_line, :middle_line, :bottom_line
+  attr_reader :file_reader, :file_writer, :converter,
+              :top_line, :middle_line, :bottom_line
 
   def initialize
     @file_reader = FileReader.new
