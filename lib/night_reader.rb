@@ -67,7 +67,6 @@ class NightReader
     set
   end
 
-  # TODO: add method to replace $ characters in text
   def correct_for_capitals(str)
     characters = str.chars
     characters.size.times do |i|
@@ -92,18 +91,8 @@ class NightReader
     end
   end
 
-  def convert_letters_to_numbers(chars)
-    chars.gsub!('a', '1')
-    chars.gsub!('b', '2')
-    chars.gsub!('c', '3')
-    chars.gsub!('d', '4')
-    chars.gsub!('e', '5')
-    chars.gsub!('f', '6')
-    chars.gsub!('g', '7')
-    chars.gsub!('h', '8')
-    chars.gsub!('i', '9')
-    chars.gsub!('j', '0')
-    chars
+  def convert_letters_to_numbers(word)
+    word.chars.map { |l| LETTER_TO_NUM[l] }.join
   end
 
   def convert_braille_to_text(str)
