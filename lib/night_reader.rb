@@ -47,6 +47,14 @@ class NightReader
     @bottom_line = slice_braille(bottom)
   end
 
+  def get_next_set
+    set = []
+    set[0] = @top_line.shift
+    set[1] = @middle_line.shift
+    set[2] = @bottom_line.shift
+    set
+  end
+
   def convert_braille_to_text(str)
 
   end
