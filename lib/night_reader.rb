@@ -55,8 +55,14 @@ class NightReader
     set
   end
 
-  def convert_braille_to_text(str)
+  # TODO: add method to replace @ and $ characters in text
 
+  def convert_braille_to_text(str)
+    reconstruct_braille_lines(str)
+    slice_all_lines(@top_line, @middle_line, @bottom_line)
+    top_line.length.times do
+      @text << converter.get_character_from_braille(get_next_set)
+    end
   end
 end
 

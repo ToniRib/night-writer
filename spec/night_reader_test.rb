@@ -47,4 +47,13 @@ class NightReaderTest < Minitest::Test
     assert_equal ['0.', '00', '..'], reader.get_next_set
     assert_equal ['0.', '.0', '..'], reader.get_next_set
   end
+
+  def test_converts_braille_with_no_caps_or_numbers_to_text
+    reader = NightReader.new
+    hello_toni = "0.0.0.0.0....00.00.0..\n" +
+          "00.00.0..0..00.0.00.00\n" +
+          "....0.0.0...0.0.0...0.\n"
+    reader.convert_braille_to_text(hello_toni)
+    assert_equal "hello toni!", reader.text
+  end
 end
