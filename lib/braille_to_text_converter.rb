@@ -17,11 +17,11 @@ class BrailleToTextConverter
                   "uvxyz-?$" => '00'
   }.invert
 
-  def get_character(braille_set)
+  def get_character_from_braille(braille_set)
     matches = []
-    matches << find_char_match(TOP_LINE, braille_set[0].first)
-    matches << find_char_match(MIDDLE_LINE, braille_set[1].first)
-    matches << find_char_match(BOTTOM_LINE, braille_set[2].first)
+    matches << find_possible_char_matches(TOP_LINE, braille_set[0].first)
+    matches << find_possible_char_matches(MIDDLE_LINE, braille_set[1].first)
+    matches << find_possible_char_matches(BOTTOM_LINE, braille_set[2].first)
     find_common_character(matches)
   end
 
@@ -32,7 +32,7 @@ class BrailleToTextConverter
     (top_chars & middle_chars & bottom_chars).first
   end
 
-  def find_char_match(line, set)
+  def find_possible_char_matches(line, set)
     line.find { |k, v| k.include?(set) }.last
   end
 
