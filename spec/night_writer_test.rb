@@ -2,8 +2,6 @@ require 'minitest'
 require 'minitest/pride'
 require './lib/night_writer'
 
-require 'pry'
-
 class NightWriterTest < Minitest::Test
   def test_returns_zero_non_capital_chars_if_string_is_empty
     writer = NightWriter.new

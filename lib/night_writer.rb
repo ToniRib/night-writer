@@ -1,4 +1,3 @@
-require 'pry'
 require_relative 'categorize'
 require_relative 'converter'
 require_relative 'file_writer'

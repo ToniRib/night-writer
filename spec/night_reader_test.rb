@@ -2,8 +2,6 @@ require 'minitest'
 require 'minitest/pride'
 require './lib/night_reader'
 
-require 'pry'
-
 class NightReaderTest < Minitest::Test
   def test_reconstructs_long_string_into_three_lines_of_braille
     reader = NightReader.new
