@@ -43,7 +43,7 @@ class NightWriter
   def add_switch_to_word_if_necessary(word)
     if word =~ /\d/
       idx = find_first_number_index(word)
-      word.chars.insert(idx, '$').join
+      word.chars.insert(idx, '#').join
     else
       word
     end

@@ -57,7 +57,7 @@ class NightReaderTest < Minitest::Test
 
   def test_converts_to_numbers_if_word_contains_dollar_sign
     reader = NightReader.new
-    word = '$abc'
+    word = '#abc'
     assert_equal '123', reader.convert_to_numbers_if_necessary(word)
   end
 
@@ -73,9 +73,9 @@ class NightReaderTest < Minitest::Test
     assert_equal 'Toni Rib', reader.correct_for_capitals(str)
   end
 
-  def test_replaces_letters_after_dollar_signs_with_numbers
+  def test_replaces_letters_after_pound_signs_with_numbers
     reader = NightReader.new
-    str = '$abc hello hi$d'
+    str = '#abc hello hi#d'
     assert_equal '123 hello hi4', reader.correct_for_numbers(str)
   end
 

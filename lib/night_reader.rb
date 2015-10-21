@@ -73,8 +73,8 @@ class NightReader
   end
 
   def convert_to_numbers_if_necessary(word)
-    if word.include?('$')
-      split_nums = word.split('$')
+    if word.include?('#')
+      split_nums = word.split('#')
       nums = convert_letters_to_numbers(split_nums.last)
       split_nums[0] + nums
     else

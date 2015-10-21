@@ -71,7 +71,7 @@ class NightWriterTest < Minitest::Test
 
   def test_adds_switch_to_word_that_includes_number
     writer = NightWriter.new
-    assert_equal 'a$123', writer.add_switch_to_word_if_necessary('a123')
+    assert_equal 'a#123', writer.add_switch_to_word_if_necessary('a123')
   end
 
   def test_does_not_add_switch_to_word_without_number
@@ -86,13 +86,13 @@ class NightWriterTest < Minitest::Test
 
   def test_adds_dollar_sign_in_front_of_single_digit
     writer = NightWriter.new
-    assert_equal '$1', writer.add_number_switch_chars('1')
+    assert_equal '#1', writer.add_number_switch_chars('1')
   end
 
   def test_adds_dollar_sign_for_number_switch_character
     writer = NightWriter.new
     str = "This 1234 is 456 a23 string 1 with numbers."
-    switch_str = "This $1234 is $456 a$23 string $1 with numbers."
+    switch_str = "This #1234 is #456 a#23 string #1 with numbers."
     assert_equal switch_str, writer.add_number_switch_chars(str)
   end
 
