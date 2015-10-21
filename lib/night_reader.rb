@@ -31,21 +31,12 @@ class NightReader
     @text = ''
   end
 
-  # TODO: obviously need to refactor
   def reconstruct_braille_lines(str)
     split_str = str.split
-    i = 1
-    str.split.each do |line|
-      if i == 1
-        top_line << line
-        i = 2
-      elsif i == 2
-        middle_line << line
-        i = 3
-      else
-        bottom_line << line
-        i = 1
-      end
+    split_str.each_slice(3).to_a.each do |slice|
+      top_line << slice[0]
+      middle_line << slice[1]
+      bottom_line << slice[2]
     end
   end
 
@@ -53,6 +44,7 @@ class NightReader
     str.chars.each_slice(2).to_a.map { |slice| slice.join }
   end
 
+  # Can this be run on the instance variables?
   def slice_all_lines(top, middle, bottom)
     @top_line = slice_braille(top)
     @middle_line = slice_braille(middle)
