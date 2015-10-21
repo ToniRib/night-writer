@@ -62,4 +62,16 @@ class NightReaderTest < Minitest::Test
     str = '@toni @rib'
     assert_equal 'Toni Rib', reader.correct_for_capitals(str)
   end
+
+  def test_replaces_letters_after_dollar_signs_with_numbers
+    reader = NightReader.new
+    str = '$abc hello hi$d'
+    assert_equal '123 hello hi4', reader.correct_for_numbers(str)
+  end
+
+  def test_converts_all_letters_to_numbers
+    reader = NightReader.new
+    str = 'abcdefghij'
+    assert_equal '1234567890', reader.convert_letters_to_numbers(str)
+  end
 end

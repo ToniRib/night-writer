@@ -9,6 +9,18 @@ class NightReader
 
   attr_reader :file_reader, :file_writer, :converter, :top_line, :middle_line, :bottom_line, :text
 
+  LETTER_TO_NUM = { 'a' => '1',
+                    'b' => '2',
+                    'c' => '3',
+                    'd' => '4',
+                    'e' => '5',
+                    'f' => '6',
+                    'g' => '7',
+                    'h' => '8',
+                    'i' => '9',
+                    'j' => '0'
+  }
+
   def initialize
     @file_reader = FileReader.new
     @file_writer = TextFileWriter.new
@@ -62,6 +74,36 @@ class NightReader
       characters[i + 1].capitalize! if at_sign?(characters[i])
     end
     characters.join.delete("@")
+  end
+
+  def correct_for_numbers(str)
+    str.split.map do |word|
+      convert_to_numbers_if_necessary(word)
+    end.join(' ')
+  end
+
+  def convert_to_numbers_if_necessary(word)
+    if word.include?('$')
+      split_nums = word.split('$')
+      nums = convert_letters_to_numbers(split_nums.last)
+      split_nums[0] + nums
+    else
+      word
+    end
+  end
+
+  def convert_letters_to_numbers(chars)
+    chars.gsub!('a', '1')
+    chars.gsub!('b', '2')
+    chars.gsub!('c', '3')
+    chars.gsub!('d', '4')
+    chars.gsub!('e', '5')
+    chars.gsub!('f', '6')
+    chars.gsub!('g', '7')
+    chars.gsub!('h', '8')
+    chars.gsub!('i', '9')
+    chars.gsub!('j', '0')
+    chars
   end
 
   def convert_braille_to_text(str)
