@@ -12,7 +12,7 @@ class NightReader
   def initialize
     @file_reader = FileReader.new
     @file_writer = TextFileWriter.new
-    @converter = Converter.new
+    @converter = BrailleToTextConverter.new
     @top_line = ''
     @middle_line = ''
     @bottom_line = ''
@@ -37,8 +37,12 @@ class NightReader
     end
   end
 
+  def slice_braille(str)
+    str.chars.each_slice(2).to_a.map { |slice| slice.join }
+  end
+
   def convert_braille_to_text(str)
-    
+
   end
 end
 

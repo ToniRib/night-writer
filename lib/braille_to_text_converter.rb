@@ -35,5 +35,4 @@ class BrailleToTextConverter
   def find_possible_char_matches(line, set)
     line.find { |k, v| k.include?(set) }.last
   end
-
 end

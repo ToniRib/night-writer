@@ -16,4 +16,11 @@ class NightReaderTest < Minitest::Test
     assert_equal middle, reader.middle_line
     assert_equal bottom, reader.bottom_line
   end
+
+  def test_slices_line_of_braille_into_sections_of_two
+    reader = NightReader.new
+    line = '.0...0.0'
+    line_sliced = ['.0', '..', '.0', '.0']
+    assert_equal line_sliced, reader.slice_braille(line)
+  end
 end
