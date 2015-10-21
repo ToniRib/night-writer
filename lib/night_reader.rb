@@ -55,7 +55,14 @@ class NightReader
     set
   end
 
-  # TODO: add method to replace @ and $ characters in text
+  # TODO: add method to replace $ characters in text
+  def correct_for_capitals(str)
+    characters = str.chars
+    characters.size.times do |i|
+      characters[i + 1].capitalize! if at_sign?(characters[i])
+    end
+    characters.join.delete("@")
+  end
 
   def convert_braille_to_text(str)
     reconstruct_braille_lines(str)

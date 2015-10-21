@@ -51,9 +51,15 @@ class NightReaderTest < Minitest::Test
   def test_converts_braille_with_no_caps_or_numbers_to_text
     reader = NightReader.new
     hello_toni = "0.0.0.0.0....00.00.0..\n" +
-          "00.00.0..0..00.0.00.00\n" +
-          "....0.0.0...0.0.0...0.\n"
+                 "00.00.0..0..00.0.00.00\n" +
+                 "....0.0.0...0.0.0...0.\n"
     reader.convert_braille_to_text(hello_toni)
     assert_equal "hello toni!", reader.text
+  end
+
+  def test_replaces_letters_after_at_signs_with_capital_letters
+    reader = NightReader.new
+    str = '@toni @rib'
+    assert_equal 'Toni Rib', reader.correct_for_capitals(str)
   end
 end

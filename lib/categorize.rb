@@ -14,8 +14,12 @@ module Categorize
   def space?(char)
     convert_to_byte(char) == 32
   end
-  
+
   def switch?(char)
     convert_to_byte(char) == 36
+  end
+
+  def at_sign?(char)
+    convert_to_byte(char) == 64
   end
 end
