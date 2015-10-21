@@ -7,17 +7,17 @@ require 'pry'
 class TextToBrailleConverterTest < Minitest::Test
   def test_converts_single_letter_to_top_line_of_braille
     converter = TextToBrailleConverter.new
-    assert_equal '0.', converter.get_top_line('a')
+    assert_equal '0.', converter.get_line(:top, 'a')
   end
 
   def test_converts_single_letter_to_middle_line_of_braille
     converter = TextToBrailleConverter.new
-    assert_equal '..', converter.get_middle_line('a')
+    assert_equal '..', converter.get_line(:middle, 'a')
   end
 
   def test_converts_single_letter_to_bottom_line_of_braille
     converter = TextToBrailleConverter.new
-    assert_equal '..', converter.get_bottom_line('a')
+    assert_equal '..', converter.get_line(:bottom, 'a')
   end
 
   def test_detects_a_capital_letter
@@ -52,30 +52,30 @@ class TextToBrailleConverterTest < Minitest::Test
 
   def test_adds_a_shift_character_if_letter_is_capital
     converter = TextToBrailleConverter.new
-    assert_equal '..00', converter.get_top_line('N')
-    assert_equal '...0', converter.get_middle_line('N')
-    assert_equal '.00.', converter.get_bottom_line('N')
+    assert_equal '..00', converter.get_line(:top, 'N')
+    assert_equal '...0', converter.get_line(:middle, 'N')
+    assert_equal '.00.', converter.get_line(:bottom, 'N')
   end
 
   def test_does_not_add_a_shift_character_if_letter_is_lowercase
     converter = TextToBrailleConverter.new
-    assert_equal '00', converter.get_top_line('n')
-    assert_equal '.0', converter.get_middle_line('n')
-    assert_equal '0.', converter.get_bottom_line('n')
+    assert_equal '00', converter.get_line(:top, 'n')
+    assert_equal '.0', converter.get_line(:middle, 'n')
+    assert_equal '0.', converter.get_line(:bottom, 'n')
   end
 
   def test_can_write_a_space
     converter = TextToBrailleConverter.new
-    assert_equal '..', converter.get_top_line(' ')
-    assert_equal '..', converter.get_middle_line(' ')
-    assert_equal '..', converter.get_bottom_line(' ')
+    assert_equal '..', converter.get_line(:top, ' ')
+    assert_equal '..', converter.get_line(:middle, ' ')
+    assert_equal '..', converter.get_line(:bottom, ' ')
   end
 
   def test_can_write_an_exclamation_point
     converter = TextToBrailleConverter.new
-    assert_equal '..', converter.get_top_line('!')
-    assert_equal '00', converter.get_middle_line('!')
-    assert_equal '0.', converter.get_bottom_line('!')
+    assert_equal '..', converter.get_line(:top, '!')
+    assert_equal '00', converter.get_line(:middle, '!')
+    assert_equal '0.', converter.get_line(:bottom, '!')
   end
 
   def test_can_get_all_three_lines_for_lowercase_letter
