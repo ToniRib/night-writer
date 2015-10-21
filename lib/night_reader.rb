@@ -109,9 +109,8 @@ end
 if __FILE__ == $0
   nr = NightReader.new
   text = nr.file_reader.read
-  binding.pry
-  # nr.convert_text_to_braille(text)
+  nr.convert_braille_to_text(text)
 
-  # nr.file_writer.write(nr.top_line, nr.middle_line, nr.bottom_line)
-  # puts "Created #{ARGV[1]} containing #{nr.count_all_chars(text)} braille characters"
+  nr.file_writer.write(nr.text)
+  puts "Created #{ARGV[1]} containing #{nr.text.length} English characters"
 end
