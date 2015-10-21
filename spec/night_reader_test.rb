@@ -45,5 +45,6 @@ class NightReaderTest < Minitest::Test
     bottom = '....0.0.0.'
     reader.slice_all_lines(top, middle, bottom)
     assert_equal ['0.', '00', '..'], reader.get_next_set
+    assert_equal ['0.', '.0', '..'], reader.get_next_set
   end
 end
