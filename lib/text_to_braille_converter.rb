@@ -9,7 +9,9 @@ class TextToBrailleConverter
   end
 
   def get_line(which_line, letter)
-    @dictionary.lookup_braille(which_line, letter.downcase)
+    line = ''
+    line << @dictionary.lookup_braille(which_line, '@') if capital?(letter)
+    line << @dictionary.lookup_braille(which_line, letter.downcase)
   end
 
   def get_all_lines(letter)
